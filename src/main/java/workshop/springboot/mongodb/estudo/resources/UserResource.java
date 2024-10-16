@@ -1,15 +1,16 @@
 package workshop.springboot.mongodb.estudo.resources;
 
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import workshop.springboot.mongodb.estudo.domain.User;
 import workshop.springboot.mongodb.estudo.dto.UserDTO;
 import workshop.springboot.mongodb.estudo.service.UserService;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +36,16 @@ public class UserResource {
         User user = service.findById(id);
 
         return ResponseEntity.ok().body(new UserDTO(user));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@RequestBody UserDTO userdto){
+        User user = service.fromDTO(userdto);
+        user = service.insert(user);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 
 }

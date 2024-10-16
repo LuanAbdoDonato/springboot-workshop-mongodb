@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import workshop.springboot.mongodb.estudo.domain.User;
+import workshop.springboot.mongodb.estudo.dto.UserDTO;
 import workshop.springboot.mongodb.estudo.repository.UserRepository;
 import workshop.springboot.mongodb.estudo.resources.UserResource;
 import workshop.springboot.mongodb.estudo.service.exception.ObjectNotFoundException;
@@ -26,5 +27,15 @@ public class UserService {
         Optional<User> user = repository.findById(id);
 
         return user.orElseThrow(() -> new ObjectNotFoundException("Usuário inexistente"));
+    }
+
+    public User insert(User user){
+        return repository.insert(user);
+    }
+
+    public User fromDTO(UserDTO userdto){
+        User user = new User(userdto.getId(), userdto.getName(), userdto.getEmail());
+
+        return user;
     }
 }

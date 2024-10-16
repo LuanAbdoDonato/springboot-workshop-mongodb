@@ -1,9 +1,15 @@
 package workshop.springboot.mongodb.estudo.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.annotation.Collation;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Objects;
 
+@Document
 public class User {
 
+    @Id
     private String id;
     private String name;
     private String email;

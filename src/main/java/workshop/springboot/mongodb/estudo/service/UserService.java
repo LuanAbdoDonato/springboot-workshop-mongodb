@@ -3,6 +3,8 @@ package workshop.springboot.mongodb.estudo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import workshop.springboot.mongodb.estudo.domain.User;
 import workshop.springboot.mongodb.estudo.dto.UserDTO;
 import workshop.springboot.mongodb.estudo.repository.UserRepository;
@@ -31,6 +33,10 @@ public class UserService {
 
     public User insert(User user){
         return repository.insert(user);
+    }
+
+    public void deleteById(String id){
+        repository.deleteById(id);
     }
 
     public User fromDTO(UserDTO userdto){

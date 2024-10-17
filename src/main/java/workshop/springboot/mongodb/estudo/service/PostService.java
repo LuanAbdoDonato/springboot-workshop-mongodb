@@ -6,6 +6,7 @@ import workshop.springboot.mongodb.estudo.domain.Post;
 import workshop.springboot.mongodb.estudo.repository.PostRepository;
 import workshop.springboot.mongodb.estudo.service.exception.ObjectNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,5 +19,9 @@ public class PostService {
         Optional<Post> post = repository.findById(id);
 
         return post.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public List<Post> findByText(String text){
+        return repository.findByTitleContainingIgnoreCase(text);
     }
 }

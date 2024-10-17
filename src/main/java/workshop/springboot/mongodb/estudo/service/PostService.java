@@ -6,6 +6,7 @@ import workshop.springboot.mongodb.estudo.domain.Post;
 import workshop.springboot.mongodb.estudo.repository.PostRepository;
 import workshop.springboot.mongodb.estudo.service.exception.ObjectNotFoundException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +24,9 @@ public class PostService {
 
     public List<Post> findByText(String text){
         return repository.findByTitle(text);
+    }
+
+    public List<Post> fullSearch(String text, Date minDate, Date maxDate){
+        return repository.fullSearch(text, minDate, maxDate);
     }
 }

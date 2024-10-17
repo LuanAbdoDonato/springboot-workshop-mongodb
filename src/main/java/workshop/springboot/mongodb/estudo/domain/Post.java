@@ -61,7 +61,7 @@ public class Post {
         this.body = body;
     }
 
-    public AuthorDTO getUser() {
+    public AuthorDTO getAuthor() {
         return author;
     }
 

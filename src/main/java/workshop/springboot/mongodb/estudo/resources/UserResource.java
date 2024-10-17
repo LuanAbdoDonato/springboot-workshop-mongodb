@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import workshop.springboot.mongodb.estudo.domain.Post;
 import workshop.springboot.mongodb.estudo.domain.User;
 import workshop.springboot.mongodb.estudo.dto.UserDTO;
 import workshop.springboot.mongodb.estudo.service.UserService;
@@ -66,6 +67,14 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User user = service.findById(id);
+
+        List<Post> posts = user.getPosts();
+
+        return ResponseEntity.ok().body(posts);
+    }
 
 
 }

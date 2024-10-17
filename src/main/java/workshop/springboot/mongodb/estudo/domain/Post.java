@@ -2,6 +2,7 @@ package workshop.springboot.mongodb.estudo.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import workshop.springboot.mongodb.estudo.dto.AuthorDTO;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -15,17 +16,17 @@ public class Post {
     private String title;
     private String body;
 
-    private User user;
+    private AuthorDTO author;
 
     public Post(){
     }
 
-    public Post(String id, Instant date, String title, String body, User user) {
+    public Post(String id, Instant date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
         this.body = body;
-        this.user = user;
+        this.author = author;
     }
 
     public String getId() {
@@ -60,8 +61,8 @@ public class Post {
         this.body = body;
     }
 
-    public User getUser() {
-        return user;
+    public AuthorDTO getUser() {
+        return author;
     }
 
     @Override

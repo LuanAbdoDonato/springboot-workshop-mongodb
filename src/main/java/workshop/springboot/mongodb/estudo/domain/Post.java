@@ -3,8 +3,12 @@ package workshop.springboot.mongodb.estudo.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import workshop.springboot.mongodb.estudo.dto.AuthorDTO;
+import workshop.springboot.mongodb.estudo.dto.CommentDTO;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -12,16 +16,18 @@ public class Post {
 
     @Id
     private String id;
-    private Instant date;
+    private Date date;
     private String title;
     private String body;
 
     private AuthorDTO author;
 
+    private List<CommentDTO> comments = new ArrayList<>();
+
     public Post(){
     }
 
-    public Post(String id, Instant date, String title, String body, AuthorDTO author) {
+    public Post(String id, Date date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -37,11 +43,11 @@ public class Post {
         this.id = id;
     }
 
-    public Instant getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -63,6 +69,10 @@ public class Post {
 
     public AuthorDTO getAuthor() {
         return author;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
     }
 
     @Override
